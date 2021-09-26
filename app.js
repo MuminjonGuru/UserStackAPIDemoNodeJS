@@ -1,0 +1,16 @@
+const express = require('express')
+const app = express()
+const port = 2424
+
+app.use(express.static('public'))
+app.use('/css', express.static(__dirname + 'public/css'))
+app.use('/img', express.static(__dirname + 'public/img'))
+app.use('/js', express.static(__dirname + 'public/js'))
+
+app.set('views', './src/views')
+app.set('view engine', 'ejs')
+
+const userStackRouter = require('./src/routes/userstack')
+app.use('/', userStackRouter)
+
+app.listen(port, () => console.log(`Running on ${port} port`))
